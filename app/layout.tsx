@@ -3,6 +3,9 @@ import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 
+// These styles apply to every route in the application
+import './globals.css'
+
 export const metadata = {
   title: 'Mantine Next.js template',
   description: 'I am using Mantine with Next.js!',
