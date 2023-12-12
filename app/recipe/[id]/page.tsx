@@ -1,6 +1,6 @@
 import { Badge, Container, Group, Image, List, ListItem, Text } from '@mantine/core';
 
-export default function ({ params }: { params: { slug: string } }) {
+export default function RecipePage({ params }: { params: { slug: string } }) {
   return (
     <Container>
       <Image
