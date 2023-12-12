@@ -24,3 +24,17 @@ I think I'll stick to Mantine's forms for now, for visual consistency
 
 ## Yup
 The task also mentions using Yup, a validaiton library, tho I'm not really sure where to slot that, since I'm already using TS.
+
+## Prisma
+Seems cool af
+
+Here's what I did:
+1. Installed `prisma @prisma/client`
+2. Ran smth like `prisma init`, created a prisma schema file, and a `.env`
+3. I defined the connection in the `datasource` section of the schema. I copied all the info I needed from Vercel Postgres, which kindly offers a snippet to copy for Prisma apps.
+4. I created my base db model in the schema (more on types exists in the Prisma docs)
+5. I wanted to create a migration (generate the DB tables) based on the models I created, so I ran `npx prisma migrate`.
+6. And voila, migration created, and ran. And the Vercel Postgres Server updated accordingly
+
+- I'm still to find out the prisma generators and their use case.
+- The docs also have a lot to read about. Will do that sometime.
