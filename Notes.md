@@ -55,6 +55,10 @@ Here's what I did:
 
 Simply running `npx prisma studio` opens up a GUI for the DB.
 
+### Prisma Error Handling
+- Looky [here](https://www.prisma.io/docs/orm/prisma-client/debugging-and-troubleshooting/handling-exceptions-and-errors)
+- And [here](https://www.prisma.io/docs/orm/reference/error-reference#prismaclientknownrequesterror)
+
 ## Backend
 Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body).
 - I should read more on the `fetch` api [see MDN].
