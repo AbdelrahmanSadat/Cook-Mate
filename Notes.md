@@ -8,6 +8,8 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
 - NextJS has a section of the docs talking about internationalization.
 - NextJS used to have `getStaticProps` and other similar functions that were used mainly for data fetching. However, that was in the older pages router. Now with the app router, you can fetch data directly in the component no problem, using `fetch` or otherwise.
 - Check default caching behavior on data fetching. I might need to change a default or two.
+- From the route segment config [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
+> Good to know: The new model in the app directory favors granular caching control at the fetch request level over the binary all-or-nothing model of getServerSideProps and getStaticProps at the page-level in the pages directory. The dynamic option is a way to opt back in to the previous model as a convenience and provides a simpler migration path.
 
 ### Data Fetching
 - Data fetching in Server components is different from Client components. 
@@ -53,6 +55,11 @@ Here's what I did:
 
 Simply running `npx prisma studio` opens up a GUI for the DB.
 
+## Backend
+Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body).
+- I should read more on the `fetch` api [see MDN].
+    - Especially fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/json) and [Resposne](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+- The NextJS "middleware", is different from Express.js middleware.
 
 
 
@@ -66,3 +73,5 @@ Simply running `npx prisma studio` opens up a GUI for the DB.
 
 - Error handling
 - Tests n Docs n stuff
+
+- Refactoring route validation to [middleware](https://shadcn.com/validation-middleware)
