@@ -73,6 +73,12 @@ Looky [here](https://www.prisma.io/docs/orm/prisma-client/queries/crud#create)
 - Looky [here](https://www.prisma.io/docs/orm/prisma-client/debugging-and-troubleshooting/handling-exceptions-and-errors)
 - And [here](https://www.prisma.io/docs/orm/reference/error-reference#prismaclientknownrequesterror)
 
+## Supabase
+I do not mention Vercel because its setup was so easy. However, it was very limited in its free plan. I messed around with migrations a bit, and boom, reached my quota. So I migrated to Supabase.
+- In prisma, the datasource in the schema will still take a url.
+    - This URL can be found in Supabase. Under project settings -> Database -> Connections String
+    - **MAKE SURE** that you select the NodeJS connection string. And refer to [this](https://github.com/prisma/prisma/issues/11831) if you still have issues related.
+
 
 ## Next-Auth
 - Understanding Next-Auth

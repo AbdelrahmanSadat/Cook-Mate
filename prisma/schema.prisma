@@ -1,13 +1,12 @@
 datasource db {
-    provider  = "postgresql"
-    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    provider = "postgresql"
+    url      = env("POSTGRES_URL") // uses connection pooling
+    // directUrl = env("POSTGRES_URL") // uses a direct connection
 }
 
 generator client {
     provider = "prisma-client-js"
 }
-
 
 // TODO: naming conventions. (https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql)
 // Might need to use @map and @@map, because NextAuth requires specific naming conventions
@@ -16,13 +15,13 @@ model Recipe {
     title       String   @db.VarChar(255)
     description String   @db.Text
     steps       String   @db.Text
-    ingredients String[] 
+    ingredients String[]
     createdAt   DateTime @default(now()) @db.Timestamp(6)
     updatedAt   DateTime @default(now()) @db.Timestamp(6)
     // content     String? // an optional field?
     // TODO: add image
     creatorId   Int
-    creator        User     @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model User {
@@ -30,6 +29,6 @@ model User {
     username String?  @db.VarChar(255)
     email    String   @unique @db.VarChar(255)
     hash     String   @db.Text
-    recipes   Recipe[]
+    recipes  Recipe[]
     // TODO: add password hash field
 }
