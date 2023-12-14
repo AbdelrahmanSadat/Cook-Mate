@@ -7,14 +7,25 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
 - Routes rely more on directory name, file names are standard (page.tsx, etc.), set in stone and won't change anytime soon.
 - NextJS has a section of the docs talking about internationalization.
 - NextJS used to have `getStaticProps` and other similar functions that were used mainly for data fetching. However, that was in the older pages router. Now with the app router, you can fetch data directly in the component no problem, using `fetch` or otherwise.
-- Check default caching behavior on data fetching. I might need to change a default or two.
 - From the route segment config [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
-> Good to know: The new model in the app directory favors granular caching control at the fetch request level over the binary all-or-nothing model of getServerSideProps and getStaticProps at the page-level in the pages directory. The dynamic option is a way to opt back in to the previous model as a convenience and provides a simpler migration path.
 
 ### Data Fetching
 - Data fetching in Server components is different from Client components. 
     - In client components, you use hooks, either useEffect, of if you're using a library like SWR that exposes its own custom hooks.
     - In server components, you can use NextJS's extended `fetch` api.
+> Good to know: The new model in the app directory favors granular caching control at the fetch request level over the binary all-or-nothing model of getServerSideProps and getStaticProps at the page-level in the pages directory. The dynamic option is a way to opt back in to the previous model as a convenience and provides a simpler migration path.
+- Check default caching behavior on data fetching. I might need to change a default or two.
+- I should read more on the `fetch` api [see MDN].
+    - Especially fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/json) and [Resposne](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+
+
+### API
+Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body).
+#### Middleware
+- The NextJS "middleware", is different from Express.js middleware.
+    - See NextJS changes to [middleware](https://nextjs.org/docs/messages/middleware-upgrade-guide#no-response-body). You can no longer return a response in the middleware. Only redirect or rewrite. They explain their reasoning in the docs I linked.
+    - That makes me think, that whoever made this task did not really have Next 12.2+ in mind? Because how am I supposed to use the NextJS middleware in my api, when clearly NextJS want it to be treated more like a client side thing that can't return a response?
+
 
 ## Formik
 ~~The task says to use Formik, but frankly I am hesitant to do so. In any way, there will only be 3 simple forms, login, register, and adding/editing recipe. But the other main reason is that Formik has been out of development for almost 3 years. This on its own is a problem, but add to that how much has changed in the React approach to things and its ecosystem, and the library will soon become, if it isn't already, unusable.~~
@@ -55,22 +66,26 @@ Here's what I did:
 
 Simply running `npx prisma studio` opens up a GUI for the DB.
 
-### Prisma Error Handling
+### Queries
+Looky [here](https://www.prisma.io/docs/orm/prisma-client/queries/crud#create)
+
+### Error Handling
 - Looky [here](https://www.prisma.io/docs/orm/prisma-client/debugging-and-troubleshooting/handling-exceptions-and-errors)
 - And [here](https://www.prisma.io/docs/orm/reference/error-reference#prismaclientknownrequesterror)
 
-## Backend
-Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body).
-- I should read more on the `fetch` api [see MDN].
-    - Especially fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/json) and [Resposne](https://developer.mozilla.org/en-US/docs/Web/API/Response)
-- The NextJS "middleware", is different from Express.js middleware.
+
+## Next-Auth
+- Understanding Next-Auth
+- My pitfall is thinking about frameworks that would invert all control. I don't like those. Nor should I think too much about them.
+- I should've started with the docs all along, man. They seem pretty good, too.
+
 
 
 
 
 ## Todos
 - Data Fetching
-- Auth
+- Auth [OAuth and JWT]
 - CRUD routes for Recipes
 - Auth Forms
 - CRUD forms
@@ -79,3 +94,11 @@ Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-applic
 - Tests n Docs n stuff
 
 - Refactoring route validation to [middleware](https://shadcn.com/validation-middleware)
+
+- Navigation
+- A Navbar
+
+- RATINGS
+
+- Seeding?
+- bcrypting
