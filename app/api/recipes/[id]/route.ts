@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { getServerSession } from 'next-auth';
 import { ValidationError, array, number, object, string } from 'yup';
+import { authOptions } from '../../auth/[...nextauth]/route';
 export const dynamic = 'force-dynamic';
 
 // route params will always be string, even if cast as id:number ?
@@ -14,8 +16,13 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) return Response.json('User unauthorized', { status: 401 });
     const body = await request.json();
     editRecipeDto.validateSync(body);
+    let recipteToUpdate = await prisma.recipe.findFirstOrThrow({ where: { id: +params.id } });
+    if (recipteToUpdate.creatorId != session.user?.id)
+      return Response.json('User Unauthorized', { status: 401 });
 
     let res = await prisma.recipe.update({ where: { id: +params.id }, data: body });
     if (!res) return Response.json('Recipe not found', { status: 404 });
@@ -29,6 +36,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) return Response.json('User unauthorized', { status: 401 });
+    let recipteToDelete = await prisma.recipe.findFirstOrThrow({ where: { id: +params.id } });
+    if (recipteToDelete.creatorId != session.user?.id)
+      return Response.json('User Unauthorized', { status: 401 });
+
     let res = await prisma.recipe.delete({ where: { id: +params.id } });
     return Response.json(res);
   } catch (err) {

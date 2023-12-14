@@ -1,5 +1,7 @@
 import prisma from '@/lib/prisma';
 import { ValidationError, array, object, string } from 'yup';
+import { authOptions } from '../auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 
 // This is opting out of caching by default. Similar to getServerSideProps in previous Next versions
 export const dynamic = 'force-dynamic'; // defaults to auto
@@ -11,6 +13,9 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    if(!session) return Response.json("User unauthorized", {status:401})
+
     const body = await request.json();
 
     //   async approach
@@ -21,8 +26,7 @@ export async function POST(request: Request) {
     createRecipeDto.validateSync(body);
 
     //   TODO: creator id from authorized user
-    const res = await prisma.recipe.create({ data: { ...body, creatorId: 1 } });
-    console.log(res);
+    const res = await prisma.recipe.create({ data: { ...body, creatorId: session.user?.id } });
 
     return Response.json(body, { status: 201 });
     // let createdRecipe = await prisma.recipe.create()
