@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { getServerSession } from 'next-auth';
 import { ValidationError, array, number, object, string } from 'yup';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '../../auth/[...nextauth]/authOptions';
 export const dynamic = 'force-dynamic';
 
 // route params will always be string, even if cast as id:number ?

@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
 import { ValidationError, array, object, string } from 'yup';
-import { authOptions } from '../auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/authOptions';
 
 // This is opting out of caching by default. Similar to getServerSideProps in previous Next versions
 export const dynamic = 'force-dynamic'; // defaults to auto
