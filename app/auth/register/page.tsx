@@ -3,52 +3,62 @@
 
 import { Container, Group } from '@mantine/core';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { signIn } from 'next-auth/react';
 import * as Yup from 'yup';
 
-
-// TODO: prettify this bad boy. Center stuff and shadows and colors and shit
+// TODO: prettify this bad boy. Center stuff and shadows and colors, etc.
 // Maybe set width for labels, and make a div around them, so that all inputs and labels are vertically aligned. Or make it a grid or whatever (that sounds too much tho)
 
-// TODO: add Yup validation
+// TODO: add Yup validation. And add onSubmit Error Validation
 export default function RegisterPage() {
   return (
     <Container className="h-full flex flex-wrap justify-center content-center">
       <Formik
-        initialValues={{ email: '', password: '', rePassword: '' }}
-        onSubmit={(values) => {
-          console.log(values);
+        initialValues={{ username: '', email: '', password: '', rePassword: '' }}
+        onSubmit={async (values) => {
+          const createdUserRes = await fetch('/api/auth/create', {
+            method: 'POST',
+            body: JSON.stringify(values),
+          }).catch((err) => console.log(err));
+          let body = await createdUserRes?.json();
+          console.log(createdUserRes, body);
+
+          if (createdUserRes?.ok) {
+            signIn('credentials', { email: values.email, password: values.password, callbackUrl:'/' });
+          }
         }}
       >
-        <Form>
+        {
+          <Form>
+            <Group className="flex justify-center mt-3">
+              <label htmlFor="username">Username</label>
+              <Field name="username" type="text" />
+              <ErrorMessage name="username"></ErrorMessage>
+            </Group>
 
-        <Group className="flex justify-center mt-3">
-            <label htmlFor="userName">Username</label>
-            <Field name="userName" type="text" />
-            <ErrorMessage name="userName"></ErrorMessage>
-          </Group>
+            <Group className="flex justify-center mt-3">
+              <label htmlFor="email">Email</label>
+              <Field name="email" type="text" />
+              <ErrorMessage name="email"></ErrorMessage>
+            </Group>
 
-          <Group className="flex justify-center mt-3">
-            <label htmlFor="email">Email</label>
-            <Field name="email" type="text" />
-            <ErrorMessage name="email"></ErrorMessage>
-          </Group>
+            <Group className="flex justify-center mt-3">
+              <label htmlFor="password">Password</label>
+              <Field name="password" type="password" />
+              <ErrorMessage name="password"></ErrorMessage>
+            </Group>
 
-          <Group className="flex justify-center mt-3">
-            <label htmlFor="password">Password</label>
-            <Field name="password" type="password" />
-            <ErrorMessage name="password"></ErrorMessage>
-          </Group>
+            <Group className="flex justify-center mt-3">
+              <label htmlFor="rePassword">Re-Enter Password</label>
+              <Field name="rePassword" type="password" />
+              <ErrorMessage name="rePassword"></ErrorMessage>
+            </Group>
 
-          <Group className="flex justify-center mt-3">
-            <label htmlFor="rePassword">Re-Enter Password</label>
-            <Field name="rePassword" type="password" />
-            <ErrorMessage name="rePassword"></ErrorMessage>
-          </Group>
-
-          <Group className="flex justify-center mt-3">
-            <button type="submit">Register</button>
-          </Group>
-        </Form>
+            <Group className="flex justify-center mt-3">
+              <button type="submit">Register</button>
+            </Group>
+          </Form>
+        }
       </Formik>
     </Container>
   );
