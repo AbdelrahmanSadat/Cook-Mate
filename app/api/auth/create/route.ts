@@ -1,6 +1,6 @@
 // We impot our prisma client
 // Prisma will help handle and catch errors
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { hashSync } from "bcrypt";
 import prisma from "@/lib/prisma";
 
@@ -19,9 +19,10 @@ export async function POST(request: Request) {
     return Response.json("Password must be 6 characters or longer", {status: 400})
   }
   try {
-    const user = await prisma.user.create({
+    const user: Partial<User> = await prisma.user.create({
       data: { username, email, hash: hashPassword(body.password) },
     });
+    delete user.hash
     return Response.json(user, {status: 201})
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
