@@ -5,7 +5,7 @@ import { hashSync } from "bcrypt";
 import prisma from "@/lib/prisma";
 
 // We hash the user entered password using bcrypt
-export const hashPassword = (string: string) => {
+const hashPassword = (string: string) => {
   return hashSync(string, 10)
 };
 // function to create user in our database
