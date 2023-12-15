@@ -15,7 +15,7 @@ model Recipe {
     title       String   @db.VarChar(255)
     description String   @db.Text
     steps       String   @db.Text
-    ingredients String[]
+    ingredients String   @db.Text
     createdAt   DateTime @default(now()) @db.Timestamp(6)
     updatedAt   DateTime @default(now()) @db.Timestamp(6)
     // content     String? // an optional field?
