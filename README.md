@@ -1,17 +1,20 @@
-# Mantine Next.js template
+# Cook Mate
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+## Frameworks and Libraries
+This project uses
+- React 18
+- NextJS 14
+- NextAuth 4
+- Prisma
+- Formik 2.4.5
+- Yup for validation
+- Mantine for UI components
+- Tailwindcss for styling
 
-## Features
-
-This template comes with the following features:
-
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Deployment
+- The app is deployed on Vercel [here](https://cook-mate-lilac.vercel.app/)
+- The DB is deployed on [Supabase](https://supabase.com/)
+> I am aware that the task requirements had a preference for Vercel Postgres. However, its memory usage was very limiting, and I hit the quota for their "hobby" tier when I re-ran my migrations a few times.
 
 ## npm scripts
 
@@ -30,11 +33,7 @@ This template comes with the following features:
 - `jest:watch` – starts jest watch
 - `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
 
-### Other scripts
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
 
 
 
@@ -42,12 +41,14 @@ This template comes with the following features:
 ## Background
 This is not a disclaimer.
 
-I'm writing this because I'd love to share the process and context of how I developed this app. It has been a learning experience for me more than anything....
+I'm writing this because I'd love to share the context of my developing this app. It has been a learning experience for me more than anything....
 
-The moment I got the email with this task, I was studying on my own little roadmap, getting back to React & NextJS after a 3-4 year hiatus. There wasn't much that I remembered anyway, I was gonna have to re-learn everything again, but I could already tell, a lot has changed since.... Functional components, hooks, the docs, NextJS, App router, Formik, the ecosystem...
+The moment I got the email with this task, I was studying, on my own little roadmap, getting back to React & NextJS after a 3-4 year hiatus. There wasn't much that I remembered anyway, I was gonna have to re-learn everything again, but I could already tell, a lot has changed since; Functional components, `hooks` , the docs, NextJS, App router, Formik, the ecosystem... Not to mention all the other frameworks and libraries that I'd be using for the first time (Prisma, NextAuth, MantineUI, Yup), and even deployment servers (Vercel, Supabase).
 
-What I want to emphasize is that I basically re-learned React & NextJS in this one week...(add everything else you learned, Formik, Prisma, Vercel deployments & storage, Mantine)
+What I want to emphasize is that I basically re-learned React & NextJS in this one week, and learned all the other libraries and frameworks I mentioned for the first time.
 
-And whatever the result of the interview is, I probably won't stop learning anytime soon, I'm already `hook`ed (pun intended). But I'd love if I continue to do that with you.
+I am aware that aspects of the app could be better. Like adding ratings, OAuth authentication, more tests, more reliance on middleware, refactoring some code, and better typing in some. However, I am proud of prioritizing the learning experience, knowing that every feature or piece of quality I left out, I could easily add given time.
+
+And whatever the result of the interview is, I probably won't stop learning anytime soon, I'm already `hook`ed (pun intended). But I'd love to continue to do that with you.
 
 And thank you for a well-thought out technical task, it was a valuable learning experience and shows you care about adabtapility and curiousity, which I appreciate. And as someone who's been through some questionable interviews lately, this task alone has been one of the most valuable and fun!

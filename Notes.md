@@ -23,8 +23,9 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
 Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers#request-body).
 #### Middleware
 - The NextJS "middleware", is different from Express.js middleware.
-    - See NextJS changes to [middleware](https://nextjs.org/docs/messages/middleware-upgrade-guide#no-response-body). You can no longer return a response in the middleware. Only redirect or rewrite. They explain their reasoning in the docs I linked.
-    - That makes me think, that whoever made this task did not really have Next 12.2+ in mind? Because how am I supposed to use the NextJS middleware in my api, when clearly NextJS want it to be treated more like a client side thing that can't return a response?
+    - ~~See NextJS changes to [middleware](https://nextjs.org/docs/messages/middleware-upgrade-guide#no-response-body). You can no longer return a response in the middleware. Only redirect or rewrite. They explain their reasoning in the docs I linked. ~~
+    - ~~That makes me think, that whoever made this task did not really have Next 12.2+ in mind? Because how am I supposed to use the NextJS middleware in my api, when clearly NextJS want it to be treated more like a client side thing that can't return a response? ~~
+    > You can respond from Middleware directly by returning a Response or NextResponse instance. (This is available since Next.js v13.1.0)
 
 
 ## Formik
@@ -85,26 +86,44 @@ I do not mention Vercel because its setup was so easy. However, it was very limi
 - My pitfall is thinking about frameworks that would invert all control. I don't like those. Nor should I think too much about them.
 - I should've started with the docs all along, man. They seem pretty good, too.
 
+## SWR
+- see [this](https://github.com/vercel/swr/issues/93) on when to use SWR and when to simply use `fetch`.
+
+```javascript
+// "Parameters" fetches the param types of a function. And since this is a wrapper, this is all we need
+const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
+// convoluted wrapper around useSWR, just to pass multiple arguments
+const { data, error, isLoading } = useSWR(['/api/auth/create', {method: 'POST', body: JSON.stringify({username: 'B', email: 'test1@test.com', password: 'password'})}], ([url, options])=> fetcher(url, options));
+console.log(data);
+```
+
 
 
 
 
 ## Todos
-- Data Fetching
-- Auth [OAuth and JWT]
-- CRUD routes for Recipes
-- Auth Forms
-- CRUD forms
+- Auth [OAuth and JWT] (I won't do OAuth. I have Google set up if need be)
+- Registeration Form. (going from create, to log in [redirect if valid, from the create route, instead of returning user])
+- CRUD form for Recipes.
+    - Change ingredients to a string in the DB. Make it a textarea in the form
+- Navbar & Navigation 
 
 - Error handling
 - Tests n Docs n stuff
 
 - Refactoring route validation to [middleware](https://shadcn.com/validation-middleware)
+- Refactoring authenticaiton to NextJS[middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware#producing-a-response), or that provided by [Next-Auth](https://next-auth.js.org/configuration/nextjs#middleware)
+- OAuth, using Next-Auth Prisma [adapter](https://authjs.dev/reference/adapter/prisma)
 
-- Navigation
-- A Navbar
 
 - RATINGS
 
 - Seeding?
 - bcrypting
+
+
+
+google console api, no authorized domain
+can maybe change authorized redirect URIs, to be more specific
+
+disabled type check errors on Next build. Can check type errors locally, fix them, and then remove that. 
