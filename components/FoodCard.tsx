@@ -3,6 +3,8 @@ import { Recipe } from '@prisma/client';
 import Link from 'next/link';
 
 export default function FoodCard({ recipe }: { recipe: Recipe }) {
+  const maxDescriptionLength = 250;
+
   return (
     <>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -17,16 +19,17 @@ export default function FoodCard({ recipe }: { recipe: Recipe }) {
         <Group justify="space-between" mt="md" mb="xs">
           <Text fw={500}>{recipe.title}</Text>
           <div>
-            <Badge color="pink">Egyptian Food</Badge>
             <Badge color="gold">3/5 Stars</Badge>
           </div>
         </Group>
 
         <Text size="sm" c="dimmed">
-          {recipe.description}
+          {recipe.description.length > maxDescriptionLength
+            ? `${recipe.description.substring(0, maxDescriptionLength)}...`
+            : recipe.description}
         </Text>
 
-        <Link href={`recipes/${recipe.id}`}>
+        <Link className='no-underline' href={`recipes/${recipe.id}`}>
           <Button color="blue" fullWidth mt="md" radius="md">
             See How To Make
           </Button>
