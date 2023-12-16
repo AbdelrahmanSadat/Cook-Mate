@@ -15,7 +15,7 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
     - In server components, you can use NextJS's extended `fetch` api.
 > Good to know: The new model in the app directory favors granular caching control at the fetch request level over the binary all-or-nothing model of getServerSideProps and getStaticProps at the page-level in the pages directory. The dynamic option is a way to opt back in to the previous model as a convenience and provides a simpler migration path.
 - Check default caching behavior on data fetching. I might need to change a default or two.
-    - And yes, I had to change the default caching behavior. I need to understand exactly and why tf caching is defaulted/opt-out like that.
+    - **Important**: Yes, I had to change the default caching behavior. I need to understand exactly and why tf caching is defaulted/opt-out like that.
 - I should read more on the `fetch` api [see MDN].
     - Especially fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/json) and [Resposne](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 
@@ -132,3 +132,5 @@ disabled type check errors on Next build. Can check type errors locally, fix the
 ## Aftercare
 When you're done, go back through the whole project, clean it up, add comments, add tests. Continue it as you would, to use it as a reference point in the future.
 And make sure to take mental note of stable patterns to use in the future (fetch API, typings, auth, etc.)
+
+Consider writing your own formik snippet extension. Or formik-mantine bindings

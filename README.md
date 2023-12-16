@@ -73,3 +73,5 @@ This is a list of the things I am aware I missed out on due to time. I'll contin
 And whatever the result of the interview is, I probably won't stop learning anytime soon, I'm already [hook](https://react.dev/reference/react/hooks)ed (pun intended). But I'd love to continue to do that with you.
 
 And thank you for a well-thought out technical task, it was a valuable learning experience and shows you care about adabtapility and curiousity, which I appreciate. And as someone who's been through some questionable interviews lately, this task alone has been one of the most valuable and fun!
+
+And I would love to hear some feedback from you. Like what you think I should prioritize, or anything I missed (besides the obvious).

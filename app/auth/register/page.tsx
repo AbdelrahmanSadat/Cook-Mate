@@ -20,8 +20,6 @@ export default function RegisterPage() {
             method: 'POST',
             body: JSON.stringify(values),
           }).catch((err) => console.log(err));
-          let body = await createdUserRes?.json();
-          console.log(createdUserRes, body);
 
           if (createdUserRes?.ok) {
             signIn('credentials', { email: values.email, password: values.password, callbackUrl:'/' });
