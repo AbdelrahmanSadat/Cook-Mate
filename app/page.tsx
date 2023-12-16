@@ -7,7 +7,7 @@ import { Recipe } from '@prisma/client';
 export const fetchCache = 'force-no-store';
 
 export default async function HomePage() {
-  const recipesRes = await fetch(`${process.env.domain}/api/recipes`);
+  const recipesRes = await fetch(`${process.env.DOMAIN}/api/recipes`);
   const recipes = await recipesRes.json();
 
 
