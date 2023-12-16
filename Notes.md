@@ -6,7 +6,7 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
 ## NextJS
 - Routes rely more on directory name, file names are standard (page.tsx, etc.), set in stone and won't change anytime soon.
 - NextJS has a section of the docs talking about internationalization.
-- NextJS used to have `getStaticProps` and other similar functions that were used mainly for data fetching. However, that was in the older pages router. Now with the app router, you can fetch data directly in the component no problem, using `fetch` or otherwise.
+- NextJS used to have `getStaticProps` and other similar functions that were used mainly for data fetching. However, that was in the older pages router. Now with the app router, you can fetch data directly in the component no problem, using `fetch` or similar third party libs.
 - From the route segment config [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
 
 ### Data Fetching
@@ -86,6 +86,9 @@ I do not mention Vercel because its setup was so easy. However, it was very limi
 - Understanding Next-Auth
 - My pitfall is thinking about frameworks that would invert all control. I don't like those. Nor should I think too much about them.
 - I should've started with the docs all along, man. They seem pretty good, too.
+- `<SessionProvider>` allows the session to be [shared](https://next-auth.js.org/getting-started/client#sessionprovider) by components across the app.
+>If you pass the session page prop to the `<SessionProvider>` – as in the example above – you can avoid checking the session twice on pages that support both server and client side rendering.
+- Take care, like always, of the differences between cliend-side and server-side authenticatino & data fetching in general in Next.
 
 ## SWR
 - see [this](https://github.com/vercel/swr/issues/93) on when to use SWR and when to simply use `fetch`.
