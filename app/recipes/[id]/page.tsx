@@ -4,7 +4,7 @@ import { Badge, Container, Group, Image, List, ListItem, Text } from '@mantine/c
 export const fetchCache = 'force-no-store'
 
 export default async function RecipePage({ params }: { params: { id: string } }) {
-  const recipeRes = await fetch(`${process.env.domain}/api/recipes/${params.id}`);
+  const recipeRes = await fetch(`${process.env.DOMAIN}/api/recipes/${params.id}`);
   const recipe: RecipeWithCreator = await recipeRes.json();
 
   return (
