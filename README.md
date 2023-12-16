@@ -102,6 +102,9 @@ This is a list of the things I am aware I missed out on due to time. I'll contin
 - Add Ratings
 - Add Search & Filtering
 
+
+Now I don't know about you, but If I saw a developer who was able to learn about all that stuff in one week, I'd want him on my team. Even if it means he's gonna take a week or two to get more in depth with what he's learned so far.
+
 And whatever the result, I probably won't stop learning anytime soon, I'm already [hook](https://react.dev/reference/react/hooks)ed.
 
 And thank you for a well-thought out technical task, it was a valuable learning experience and shows you care about adabtapility and curiousity, which I appreciate. And as someone who's been through some questionable interviews lately, this task alone has been one of the most valuable and fun!
