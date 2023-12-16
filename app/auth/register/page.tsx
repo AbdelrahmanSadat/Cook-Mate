@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 // TODO: add Yup validation. And add onSubmit Error Validation
 export default function RegisterPage() {
   return (
-    <Container className="h-full flex flex-wrap justify-center content-center">
+    <Container className="h-[90vh] overflow-hidden flex flex-wrap justify-center content-center">
       <Formik
         initialValues={{ username: '', email: '', password: '', rePassword: '' }}
         onSubmit={async (values) => {
