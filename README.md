@@ -18,9 +18,9 @@ This project uses
 
 ## How To Run Locally
 - Run `npm i`
-- Check out the `.env.example` file. I provided a list of the values I'm using in it since it's only a dmo (never do that otherwise).
+- Check out the `.env.example` file.
     - Create your own `.env` file
-    - Copy and paste the values from `.env.example` to it.
+    - Copy and paste the keys from `.env.example` to it. And check your favorite DB provider for the values, or your local DB.
 - Since I am using a serverless DB (Supabase), there is no need to create a local DB and migrate using Prisma.
 
 ### Build and dev scripts
@@ -102,7 +102,7 @@ This is a list of the things I am aware I missed out on due to time. I'll contin
 - Add Ratings
 - Add Search & Filtering
 
-And whatever the result of this is, I probably won't stop learning anytime soon, I'm already [hook](https://react.dev/reference/react/hooks)ed.
+And whatever the result, I probably won't stop learning anytime soon, I'm already [hook](https://react.dev/reference/react/hooks)ed.
 
 And thank you for a well-thought out technical task, it was a valuable learning experience and shows you care about adabtapility and curiousity, which I appreciate. And as someone who's been through some questionable interviews lately, this task alone has been one of the most valuable and fun!
 
