@@ -4,12 +4,14 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/authOptions';
 import { Recipe } from '@prisma/client';
 
+export const fetchCache = 'force-no-store';
+
 export default async function HomePage() {
   const recipesRes = await fetch(`${process.env.domain}/api/recipes`);
   const recipes = await recipesRes.json();
 
+
   const session = await getServerSession(authOptions);
-  console.log('Server session from Home Page', session);
 
   return (
     <>
