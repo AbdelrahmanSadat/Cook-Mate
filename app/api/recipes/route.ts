@@ -40,5 +40,5 @@ let createRecipeDto = object({
   title: string().required(),
   description: string().required(),
   steps: string().required(),
-  ingredients: array().of(string()).required(),
+  ingredients: string().required(),
 });

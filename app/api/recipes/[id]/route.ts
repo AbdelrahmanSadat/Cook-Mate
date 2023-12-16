@@ -9,7 +9,10 @@ export const dynamic = 'force-dynamic';
 // TODO?: See this: https://www.prisma.io/blog/nestjs-prisma-validation-7D056s1kOla1#perform-input-validation for parseInt pipe on dynamic routes
 // TODO: route validation for params
 export async function GET(request: Request, { params }: { params: { id: string } }) {
-  let res = await prisma.recipe.findFirstOrThrow({ where: { id: +params.id }, include: {creator: true} });
+  let res = await prisma.recipe.findFirstOrThrow({
+    where: { id: +params.id },
+    include: { creator: true },
+  });
   return Response.json(res);
 }
 
@@ -54,6 +57,6 @@ let editRecipeDto = object({
   title: string().optional(),
   description: string().optional(),
   steps: string().optional(),
-  ingredients: array().of(string()).optional(),
+  ingredients: string().optional(),
   creatorId: number().integer().optional(),
 });
