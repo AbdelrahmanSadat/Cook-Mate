@@ -3,7 +3,7 @@ import { ValidationError, array, object, string } from 'yup';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/authOptions';
 
-// This is opting out of caching by default. Similar to getServerSideProps in previous Next versions
+// This is opting out of caching-by-default. Similar to getServerSideProps in previous NextJS versions
 export const dynamic = 'force-dynamic'; // defaults to auto
 
 export async function GET(request: Request) {
@@ -18,14 +18,8 @@ export async function POST(request: Request) {
 
     const body = await request.json();
 
-    //   async approach
-    //   let schemaErrors;
-    //   await createRecipeDto.validate(body).catch((err) => (schemaErrors = err));
-    //   if (schemaErrors) return new Response('bad request', { status: 400 });
-
     createRecipeDto.validateSync(body);
 
-    //   TODO: creator id from authorized user
     const res = await prisma.recipe.create({ data: { ...body, creatorId: session.user?.id } });
 
     return Response.json(res, { status: 201 });
