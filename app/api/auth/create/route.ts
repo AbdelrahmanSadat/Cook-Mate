@@ -31,6 +31,5 @@ export async function POST(request: Request) {
       }
       return Response.json({message: e.message}, {status: 400})
     }
-    console.log(e)
   }
 }

@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     //   TODO: creator id from authorized user
     const res = await prisma.recipe.create({ data: { ...body, creatorId: session.user?.id } });
 
-    return Response.json(body, { status: 201 });
+    return Response.json(res, { status: 201 });
     // let createdRecipe = await prisma.recipe.create()
   } catch (err) {
     if (err instanceof ValidationError) return Response.json(err.errors, { status: 400 });
