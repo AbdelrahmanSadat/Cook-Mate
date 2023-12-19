@@ -26,6 +26,10 @@ module.exports = {
         "varsIgnorePattern": "^_",
         "caughtErrorsIgnorePattern": "^_"
       }
-    ]
+    ],
+    "curly": [
+      "error", "multi-or-nest"
+    ],
+    "nonblock-statement-body-position": ["error", "any"],
   }
 };

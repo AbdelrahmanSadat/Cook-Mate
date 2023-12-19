@@ -10,7 +10,7 @@ export default withBundleAnalyzer({
     ignoreDuringBuilds: true,
   },
   typescript:{
-    ignoreBuildErrors: true
+    // ignoreBuildErrors: true
   },
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
