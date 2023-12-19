@@ -1,20 +1,21 @@
-import prisma from '@/lib/prisma';
-import { ValidationError, array, object, string } from 'yup';
+import { ValidationError } from 'yup';
 import { getServerSession } from 'next-auth';
+import prisma from '@/lib/prisma';
 import { authOptions } from '../auth/[...nextauth]/authOptions';
+import createRecipeDto from '@/dto/recipe/createRecipe.yup';
 
 // This is opting out of caching-by-default. Similar to getServerSideProps in previous NextJS versions
 export const dynamic = 'force-dynamic'; // defaults to auto
 
-export async function GET(request: Request) {
-  let res = await prisma.recipe.findMany();
+export async function GET(_request: Request) {
+  const res = await prisma.recipe.findMany();
   return Response.json(res);
 }
 
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if(!session) return Response.json("User unauthorized", {status:401})
+    if (!session) return Response.json('User unauthorized', { status: 401 });
 
     const body = await request.json();
 
@@ -28,11 +29,3 @@ export async function POST(request: Request) {
     if (err instanceof ValidationError) return Response.json(err.errors, { status: 400 });
   }
 }
-
-// TODO?: to be moved
-let createRecipeDto = object({
-  title: string().required(),
-  description: string().required(),
-  steps: string().required(),
-  ingredients: string().required(),
-});

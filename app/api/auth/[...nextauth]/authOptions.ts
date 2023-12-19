@@ -1,49 +1,48 @@
-import NextAuth, { type NextAuthOptions } from 'next-auth';
+import { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import prisma from '@/lib/prisma';
 import { compare } from 'bcrypt';
-
+import prisma from '@/lib/prisma';
 
 export const authOptions: NextAuthOptions = {
-    session: {
-      strategy: 'jwt',
-    },
-    providers: [
-      CredentialsProvider({
-        name: 'Email',
-        credentials: {
-          email: {
-            label: 'Email',
-            type: 'email',
-            placeholder: 'hello@example.com',
-          },
-          password: { label: 'Password', type: 'password' },
+  session: {
+    strategy: 'jwt',
+  },
+  providers: [
+    CredentialsProvider({
+      name: 'Email',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'hello@example.com',
         },
-        async authorize(credentials) {
-          if (!credentials || !credentials.email || !credentials.password) return null;
-          const user = await prisma.user.findUnique({ where: { email: credentials.email } });
-          if (!user) return null;
-          const isPasswordValid = await compare(credentials.password, user.hash);
-          if (!isPasswordValid) return null;
-          return {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-          };
-        },
-      }),
-    ],
-    // by default, NextAuth will only contain "name" and "email" in the payload
-    // I wanted a "username" field, so I did those custom callbacks
-    callbacks: {
-      async jwt({ token, user, account, profile }) {
-        return { ...token, ...user };
+        password: { label: 'Password', type: 'password' },
       },
-      async session({ session, token, user }) {
+      async authorize(credentials) {
+        if (!credentials || !credentials.email || !credentials.password) return null;
+        const user = await prisma.user.findUnique({ where: { email: credentials.email } });
+        if (!user) return null;
+        const isPasswordValid = await compare(credentials.password, user.hash);
+        if (!isPasswordValid) return null;
         return {
-          expires: session.expires,
-          user: { email: session.user?.email, username: token.username, id: token.id },
+          id: `${user.id}`, // id must be a string
+          email: user.email,
+          username: user.username,
         };
       },
+    }),
+  ],
+  // by default, NextAuth will only contain "name" and "email" in the payload
+  // I wanted a "username" field, so I did those custom callbacks
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
     },
-  };
+    async session({ session, token }) {
+      return {
+        expires: session.expires,
+        user: { email: session.user?.email, username: token.username, id: token.id },
+      };
+    },
+  },
+};

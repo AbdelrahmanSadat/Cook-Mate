@@ -29,7 +29,7 @@ export default function FoodCard({ recipe }: { recipe: Recipe }) {
             : recipe.description}
         </Text>
 
-        <Link className='no-underline' href={`recipes/${recipe.id}`}>
+        <Link className="no-underline" href={`recipes/${recipe.id}`}>
           <Button color="blue" fullWidth mt="md" radius="md">
             See How To Make
           </Button>
