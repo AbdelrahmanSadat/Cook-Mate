@@ -1,8 +1,8 @@
 import FoodCard from '@/components/FoodCard';
 import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../config/authOptions';
 import { Recipe } from '@prisma/client';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
 export const fetchCache = 'force-no-store';
 

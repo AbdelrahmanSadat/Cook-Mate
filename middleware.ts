@@ -1,7 +1,5 @@
-import { getServerSession } from 'next-auth';
 import { NextRequestWithAuth, withAuth } from 'next-auth/middleware';
-import { NextRequest, NextResponse } from 'next/server';
-import { authOptions } from './config/authOptions';
+import { NextResponse } from 'next/server';
 
 // This pattern is advised against, because the middleware runs on edge runtime, which has limitations in nodejs apis and node_modules
 // export default async function middleware(req: Request) {

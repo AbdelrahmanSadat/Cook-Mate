@@ -18,7 +18,6 @@ import Link from 'next/link';
 // These styles apply to every route in the application
 import './globals.css';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../config/authOptions';
 import { SessionProvider, signOut } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 
