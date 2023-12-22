@@ -27,6 +27,27 @@ Using NextJS's [Route Handlers](https://nextjs.org/docs/app/building-your-applic
     - ~~See NextJS changes to [middleware](https://nextjs.org/docs/messages/middleware-upgrade-guide#no-response-body). You can no longer return a response in the middleware. Only redirect or rewrite. They explain their reasoning in the docs I linked. ~~
     - ~~That makes me think, that whoever made this task did not really have Next 12.2+ in mind? Because how am I supposed to use the NextJS middleware in my api, when clearly NextJS want it to be treated more like a client side thing that can't return a response? ~~
     > You can respond from Middleware directly by returning a Response or NextResponse instance. (This is available since Next.js v13.1.0)
+    - Note: NextJS doesn't allow "nested middleware", meaning defining the middleware file anywhere besides the root dir.
+        - The [solution](https://nextjs.org/docs/messages/nested-middleware) is to conditionally, using the req, define where you want pieces of the middleware to be applied on which routes.
+        - And maybe this means that using something like next-auth's `withAuth()` for middleware is preferred (if you'll guard with middleware)
+            - ~~There's still the problem of `withAuth` always authenticating the user.~~ (resolved, was caused by me forgetting to remove the token in the cookie)
+            - It's perfectly fine (if not even better) to authenticate in each route you want to guard
+                - So there's maybe a validity in trying to see why `withAuth` doesn't work, rather than trying a manual middleware auth; (which I did)
+
+- The NextJS middleware concept, and the edge runtime have caused me big problems (I'll summarize them later), because of what they can and can't run on the edge ([text](https://nextjs.org/docs/messages/node-module-in-edge-runtime)).
+
+- Avoid usage until they [settle](https://github.com/vercel/next.js/discussions/46722) on something.
+
+
+### Runtimes
+- There are two runtime options in NextJS, The NodeJS runtime and the Edge runtime.
+    - The NodeJS runtime has access to all Node.js APIs and compatible packages from the ecosystem.
+    - The Edge runtime is based on [Web APIs](https://nextjs.org/docs/app/api-reference/edge). It uses only a subset of the NodeJS api, and offers alternate polyfills? / compatibility. And it comes with a bunch of limitations, like size.
+        - It is faster, but also naturally more limiting. And it hasn't matured yet.
+        - Here are some of the [limitations](https://nextjs.org/docs/app/api-reference/edge#unsupported-apis) of the edge runtime.
+
+- Most importantly, NextJS middleware is only avilable in [Edge runtime](https://nextjs.org/docs/app/building-your-application/routing/middleware#runtime). Meaning you can't rely on it like you would the server.
+
 
 
 ## Formik
@@ -124,6 +145,7 @@ console.log(data);
 
 - Seeding?
 - bcrypting
+- cachings
 
 
 
@@ -137,3 +159,17 @@ When you're done, go back through the whole project, clean it up, add comments, 
 And make sure to take mental note of stable patterns to use in the future (fetch API, typings, auth, etc.)
 
 Consider writing your own formik snippet extension. Or formik-mantine bindings
+
+- middleware for auth.
+- passing the session through layout? SessionProvider?
+- fucking hash and password are being sent in req. check that
+
+
+
+
+
+## Notes on the middleware issue (move to Github issues)
+- https://next-auth.js.org/getting-started/typescript#module-augmentation
+- https://stackoverflow.com/questions/73588525/why-am-i-getting-this-error-when-using-next-js-middleware
+- `next-auth` is [**not** runtime agnostic](https://github.com/nextauthjs/next-auth/discussions/5855). Only the newer version of the package, namely `@auth/nextjs` will be.
+    - They really need to make this clear in the docs

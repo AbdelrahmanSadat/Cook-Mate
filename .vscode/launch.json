@@ -12,9 +12,8 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\app\\api\\auth\\[...nextauth]\\route.ts",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "outFiles": [],
+            "resolveSourceMapLocations": null,
         }
-    ]
+    ],
 }
