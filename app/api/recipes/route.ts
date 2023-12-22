@@ -1,7 +1,7 @@
 import { ValidationError } from 'yup';
 import { getServerSession } from 'next-auth';
 import prisma from '@/lib/prisma';
-import { authOptions } from '../auth/[...nextauth]/authOptions';
+import { authOptions } from '../../../config/authOptions';
 import createRecipeDto from '@/dto/recipe/createRecipe.yup';
 
 // This is opting out of caching-by-default. Similar to getServerSideProps in previous NextJS versions

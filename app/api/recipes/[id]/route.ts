@@ -2,7 +2,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { getServerSession } from 'next-auth';
 import { ValidationError, array, number, object, string } from 'yup';
 import prisma from '@/lib/prisma';
-import { authOptions } from '../../auth/[...nextauth]/authOptions';
+import { authOptions } from '../../../../config/authOptions';
 import editRecipeDto from '@/dto/recipe/editRecipe.yup';
 
 export const dynamic = 'force-dynamic';

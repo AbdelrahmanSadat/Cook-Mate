@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import '@mantine/core/styles.css';
 import React from 'react';
@@ -18,11 +18,9 @@ import Link from 'next/link';
 // These styles apply to every route in the application
 import './globals.css';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/authOptions';
+import { authOptions } from '../config/authOptions';
 import { SessionProvider, signOut } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
-
-
 
 export default function RootLayout({ children }: { children: any }) {
   return (
@@ -39,7 +37,7 @@ export default function RootLayout({ children }: { children: any }) {
         <SessionProvider>
           <MantineProvider theme={theme}>
             <AppShell pt={64}>
-              <Navbar></Navbar>
+              <Navbar />
               <AppShellMain className="">{children}</AppShellMain>
             </AppShell>
           </MantineProvider>
