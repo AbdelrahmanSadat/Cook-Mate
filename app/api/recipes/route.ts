@@ -2,7 +2,7 @@ import { ValidationError } from 'yup';
 import { getServerSession } from 'next-auth';
 import prisma from '@/lib/prisma';
 import createRecipeDto from '@/dto/recipe/createRecipe.yup';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '@/config/authOptions';
 
 // This is opting out of caching-by-default. Similar to getServerSideProps in previous NextJS versions
 export const dynamic = 'force-dynamic'; // defaults to auto

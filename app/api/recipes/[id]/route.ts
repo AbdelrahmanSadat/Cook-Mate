@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { ValidationError, array, number, object, string } from 'yup';
 import prisma from '@/lib/prisma';
 import editRecipeDto from '@/dto/recipe/editRecipe.yup';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '@/config/authOptions';
 
 export const dynamic = 'force-dynamic';
 
