@@ -1,8 +1,7 @@
 'use client';
 
 import { AppShellHeader, Button, Group, Text } from '@mantine/core';
-import { getServerSession } from 'next-auth';
-import { getSession, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -17,7 +16,7 @@ export default function Navbar() {
           </Link>
         </Text>
       </Group>
-      {status == 'authenticated' ? (
+      {status === 'authenticated' ? (
         <Group>
           <Link href="/recipes/create">
             <Button>Create Recipe</Button>

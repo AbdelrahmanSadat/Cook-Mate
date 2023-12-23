@@ -2,23 +2,12 @@
 
 import '@mantine/core/styles.css';
 import React from 'react';
-import {
-  MantineProvider,
-  ColorSchemeScript,
-  AppShell,
-  AppShellMain,
-  AppShellHeader,
-  Group,
-  Text,
-  Button,
-} from '@mantine/core';
+import { MantineProvider, ColorSchemeScript, AppShell, AppShellMain } from '@mantine/core';
+import { SessionProvider } from 'next-auth/react';
 import { theme } from '../theme';
-import Link from 'next/link';
 
 // These styles apply to every route in the application
 import './globals.css';
-import { getServerSession } from 'next-auth';
-import { SessionProvider, signOut } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 
 export default function RootLayout({ children }: { children: any }) {

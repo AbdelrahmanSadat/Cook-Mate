@@ -1,10 +1,13 @@
 'use client';
-const fetchCache = 'force-no-store';
 
-import { Container, Group, Textarea } from '@mantine/core';
+import { Container, Group } from '@mantine/core';
 import { Recipe } from '@prisma/client';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/navigation';
+
+// nextjs config value. ignore ts on line
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const fetchCache = 'force-no-store';
 
 export default function CreateRecipe() {
   const router = useRouter();
@@ -26,26 +29,26 @@ export default function CreateRecipe() {
         <Form>
           <Group className="flex justify-center conten mt-3">
             <label htmlFor="title">Title</label>
-            <Field name="title" type="text"></Field>
-            <ErrorMessage name="title"></ErrorMessage>
+            <Field name="title" type="text" />
+            <ErrorMessage name="title" />
           </Group>
 
           <Group className="flex justify-center mt-3">
             <label htmlFor="description">Description</label>
-            <Field name="description" type="text" as="textarea"></Field>
-            <ErrorMessage name="description"></ErrorMessage>
+            <Field name="description" type="text" as="textarea" />
+            <ErrorMessage name="description" />
           </Group>
 
           <Group className="flex justify-center mt-3">
             <label htmlFor="ingredients">Ingredients</label>
-            <Field name="ingredients" type="text" as="textarea"></Field>
-            <ErrorMessage name="ingredients"></ErrorMessage>
+            <Field name="ingredients" type="text" as="textarea" />
+            <ErrorMessage name="ingredients" />
           </Group>
 
           <Group className="flex justify-center mt-3">
             <label htmlFor="steps">Steps</label>
-            <Field name="steps" type="text" as="textarea"></Field>
-            <ErrorMessage name="steps"></ErrorMessage>
+            <Field name="steps" type="text" as="textarea" />
+            <ErrorMessage name="steps" />
           </Group>
 
           <Group className="flex justify-end mt-3">
