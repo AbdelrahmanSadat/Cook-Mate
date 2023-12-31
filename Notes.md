@@ -14,8 +14,15 @@ Check [this](https://mantine.dev/guides/next/#compound-components-in-server-comp
     - In client components, you use hooks, either useEffect, of if you're using a library like SWR that exposes its own custom hooks.
     - In server components, you can use NextJS's extended `fetch` api.
 > Good to know: The new model in the app directory favors granular caching control at the fetch request level over the binary all-or-nothing model of getServerSideProps and getStaticProps at the page-level in the pages directory. The dynamic option is a way to opt back in to the previous model as a convenience and provides a simpler migration path.
-- Check default caching behavior on data fetching. I might need to change a default or two.
+- Check default [caching behavior](https://nextjs.org/docs/app/building-your-application/caching#overview) on data fetching. I might need to change a default or two.
     - **Important**: Yes, I had to change the default caching behavior. I need to understand exactly and why tf caching is defaulted/opt-out like that.
+    - There are so many cache types in NextJS, they're all opt-out, or **on** by default.
+        - And they can all be *opted-out* from, **except** the [Router cache](https://youtu.be/_yhSh4g0NSk?si=aICQtQJeuncCxP7E).
+            - As it stands, the only way to opt out of the Router cache, is by making the component a client-side component with `'use-client'`
+                > The component should be a client component when you use next/link and want refetch server data. I think the Nextjs team just needs to clarify this.
+                I tested that statement, and it's true.
+
+
 - I should read more on the `fetch` api [see MDN].
     - Especially fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request/json) and [Resposne](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 
@@ -154,6 +161,26 @@ can maybe change authorized redirect URIs, to be more specific
 
 disabled type check errors on Next build. Can check type errors locally, fix them, and then remove that. 
 
+## On The Value of Frontend / UI Testing
+<blockquote>
+
+The helpfulness increase alongside the size of your application and the number of people you work with.
+
+For people working alone on static page or to-do app, it might seem stupid.
+</blockquote>
+
+<blockquote>
+
+Front end testing is hard, like really hard.
+
+Most of the react tests I’ve seen are like “does the component render?” Which is stupid and useless.
+
+The other problem with front end testing is that designers love the change the UX, making testing more of a detriment than a help because it prevents rapid changes in design and user experience.
+
+There comes a point where it can provide value… but that’s usually when it’s a company with plenty of financial resources to dedicate to testing.
+</blockquote>
+
+
 ## Aftercare
 When you're done, go back through the whole project, clean it up, add comments, add tests. Continue it as you would, to use it as a reference point in the future.
 And make sure to take mental note of stable patterns to use in the future (fetch API, typings, auth, etc.)
@@ -169,7 +196,10 @@ Consider writing your own formik snippet extension. Or formik-mantine bindings
 
 
 ## Notes on the middleware issue (move to Github issues)
-- https://next-auth.js.org/getting-started/typescript#module-augmentation
-- https://stackoverflow.com/questions/73588525/why-am-i-getting-this-error-when-using-next-js-middleware
+- [Module augmentation](https://next-auth.js.org/getting-started/typescript#module-augmentation)
+- next-auth imports (conditional issue) [in middleware](https://stackoverflow.com/questions/73588525/why-am-i-getting-this-error-when-using-next-js-middleware)
 - `next-auth` is [**not** runtime agnostic](https://github.com/nextauthjs/next-auth/discussions/5855). Only the newer version of the package, namely `@auth/nextjs` will be.
     - They really need to make this clear in the docs
+    - Part of next-auth however knows that Next's middleware runs on Edge runtime, and works with that, like `withAuth()`
+- [Wrapping middleware](https://github.com/nextauthjs/next-auth/issues/5695)
+- Middleware [upgrade](https://nextjs.org/docs/messages/middleware-upgrade-guide), or progression and breaking changes of middleware in nextjs
